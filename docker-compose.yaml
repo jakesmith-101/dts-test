@@ -1,0 +1,70 @@
+services:
+    web:
+      container_name: nginx
+      image: nginx:1.27-alpine
+      volumes:
+        - ./nginx/:/etc/nginx/conf.d
+      ports:
+        - "80:80"
+      depends_on:
+        - api
+      networks:
+        - psychic-waffle
+  
+    frontend:
+      container_name: react-frontend
+      build:
+        context: ./client
+        dockerfile: Dockerfile
+      ports:
+        - "3000:3000"
+      depends_on:
+        - api
+      networks:
+        - psychic-waffle
+  
+    api:
+      container_name: node-backend
+      build:
+        context: ./server
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      environment:
+        - TEST_POSTGRES_USER=${TEST_DB_USER}
+        - TEST_POSTGRES_PASSWORD=${TEST_DB_PASSWORD}
+        - TEST_POSTGRES_DB=${TEST_DB_NAME}
+        - TEST_POSTGRES_HOST=${TEST_DB_HOST}
+        - TEST_POSTGRES_PORT=${TEST_DB_PORT}
+      depends_on:
+        db_test:
+          condition: service_healthy
+      networks:
+        - psychic-waffle
+  
+    db_test:
+      image: postgres:16.4
+      container_name: ${TEST_DB_HOST}
+      environment:
+        - PGUSER=${TEST_DB_USER}
+        - POSTGRES_USER=${TEST_DB_USER}
+        - POSTGRES_PASSWORD=${TEST_DB_PASSWORD}
+        - POSTGRES_DB=${TEST_DB_NAME}
+        - POSTGRES_HOST=${TEST_DB_HOST}
+      ports:
+        - '4568:5432'
+      volumes:
+        - ./pg_data_test:/var/lib/postgresql/data
+      networks:
+        - psychic-waffle
+      healthcheck:
+        test: "pg_isready -h db_test"
+        interval: 5s
+        timeout: 5s
+        retries: 5
+
+volumes:
+  pg_data_test:
+networks:
+  psychic-waffle:
+    driver: bridge
