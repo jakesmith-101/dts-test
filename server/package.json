@@ -10,21 +10,22 @@
         "serve": "node dist/index.js"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/jakesmith-101/dts-test.git"
+        "type": "git",
+        "url": "git+https://github.com/jakesmith-101/dts-test.git"
     },
     "keywords": [
-      "api",
-      "node",
-      "docker"
+        "api",
+        "node",
+        "docker"
     ],
     "author": "Jake Smith",
     "license": "ISC",
     "bugs": {
-      "url": "https://github.com/jakesmith-101/dts-test/issues"
+        "url": "https://github.com/jakesmith-101/dts-test/issues"
     },
     "homepage": "https://github.com/jakesmith-101/dts-test#readme",
     "dependencies": {
-      "express": "^5.1.0"
+        "express": "^5.1.0",
+        "express-validator": "^7.2.1"
     }
 }

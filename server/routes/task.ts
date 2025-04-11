@@ -1,12 +1,6 @@
 import { Router, Request, Response } from 'express';
-
-interface Task {
-    id: number;
-    title: string;
-    description?: string;
-    status: boolean;
-    due: Date;
-}
+import { validationResult } from 'express-validator';
+import { Task, taskValidationRules } from '../models/task';
 
 const router = Router();
 let tasks: Task[] = [];
@@ -24,7 +18,14 @@ router.get('/:id', (req: Request, res: Response) => {
     else res.json(task);
 });
 
-router.post('/', (req: Request, res: Response) => {
+router.post('/', taskValidationRules, (req: Request, res: Response) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() });
+        return;
+    }
+
     const task: Task = {
         id: tasks.length + 1,
         title: req.body.title,
@@ -38,7 +39,14 @@ router.post('/', (req: Request, res: Response) => {
     res.status(201).json(task);
 });
 
-router.put('/:id', (req: Request, res: Response) => {
+router.put('/:id', taskValidationRules, (req: Request, res: Response) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() });
+        return;
+    }
+    
     // TODO: replace with DB fetch
     const task = tasks.find((t) => t.id === parseInt(req.params.id));
     
