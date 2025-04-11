@@ -29,18 +29,19 @@ export class TaskList extends LitElement {
   render() {
     // TODO: Replace items definition.
     const items = this._listItems;
+    // TODO: Define partial templates.
     return html`
-      <ul>
-        ${items.map((item) =>
-      html`
-            <li
-                class=${item.status ? 'completed' : ''}
-                @click=${() => this.toggleCompleted(item)}>
-              ${item.title}
-              ${item.description}
-            </li>`
-    )}
-      </ul>
+      <h2>To Do</h2>
+      <!-- TODO: Update expression. -->
+      <input id="newitem" aria-label="New item">
+      <button @click=${this.addToDo}>Add</button>
+      <br>
+      <label>
+        <input type="checkbox"
+          @change=${this.setHideCompleted}
+          ?checked=${this.hideCompleted}>
+        Hide completed
+      </label>
     `;
   }
 
