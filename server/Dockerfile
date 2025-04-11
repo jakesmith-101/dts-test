@@ -1,4 +1,4 @@
-FROM node:23-alpine AS base
+FROM node:slim AS base
 RUN apk add --update dumb-init
 USER node
 WORKDIR /app
@@ -7,7 +7,7 @@ COPY --chown=node:node yarn.lock yarn.lock
 RUN yarn
 
 # Install production dependencies only
-FROM node:23-alpine AS deps
+FROM node:slim AS deps
 USER node
 WORKDIR /app
 COPY --chown=node:node package.json package.json
@@ -23,7 +23,7 @@ COPY --chown=node:node . .
 RUN yarn tsc
 
 # Combine production only node_modules with compiled javascript files.
-FROM node:23-alpine AS final
+FROM node:slim AS final
 RUN apk add --update dumb-init
 USER node
 WORKDIR /app
