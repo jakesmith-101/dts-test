@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/jakesmith-101/dts-test#readme",
   "devDependencies": {
+    "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"

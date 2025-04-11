@@ -18,9 +18,8 @@ RUN yarn install --production --frozen-lockfile
 FROM base AS build
 USER node
 WORKDIR /app
-COPY --chown=node:node tsconfig.json tsconfig.json
-COPY --chown=node:node src/ src/
-COPY --chown=node:node test/ test/
+COPY --chown=node:node ../tsconfig.json tsconfig.json
+COPY --chown=node:node . .
 RUN yarn tsc
 
 # Combine production only node_modules with compiled javascript files.

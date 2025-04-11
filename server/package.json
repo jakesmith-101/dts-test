@@ -26,8 +26,5 @@
     "homepage": "https://github.com/jakesmith-101/dts-test#readme",
     "dependencies": {
       "express": "^5.1.0"
-    },
-    "devDependencies": {
-      "@types/express": "^5.0.1"
     }
 }
