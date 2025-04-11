@@ -16,8 +16,10 @@ services:
       build:
         context: ./client
         dockerfile: Dockerfile
+      environment:
+        - PORT=${TEST_REACT_PORT}
       ports:
-        - "3000:3000"
+        - "3000:${TEST_REACT_PORT}"
       depends_on:
         - api
       networks:
@@ -28,14 +30,15 @@ services:
       build:
         context: ./server
         dockerfile: Dockerfile
-      ports:
-        - "8080:8080"
       environment:
+        - PORT=${TEST_API_PORT}
         - TEST_POSTGRES_USER=${TEST_DB_USER}
         - TEST_POSTGRES_PASSWORD=${TEST_DB_PASSWORD}
         - TEST_POSTGRES_DB=${TEST_DB_NAME}
         - TEST_POSTGRES_HOST=${TEST_DB_HOST}
         - TEST_POSTGRES_PORT=${TEST_DB_PORT}
+      ports:
+        - "8080:${TEST_API_PORT}"
       depends_on:
         db_test:
           condition: service_healthy
@@ -52,7 +55,7 @@ services:
         - POSTGRES_DB=${TEST_DB_NAME}
         - POSTGRES_HOST=${TEST_DB_HOST}
       ports:
-        - '4568:5432'
+        - '4568:${TEST_DB_PORT}'
       volumes:
         - ./pg_data_test:/var/lib/postgresql/data
       networks:
