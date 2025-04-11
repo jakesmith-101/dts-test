@@ -28,11 +28,6 @@ RUN apk add --update dumb-init
 USER node
 WORKDIR /app
 COPY --chown=node:node --from=deps /app/node_modules ./app/node_modules
-COPY --chown=node:node --from=build /app/dist/src ./dist/
+COPY --chown=node:node --from=build /app/dist ./dist/
 COPY --chown=node:node --from=build /app/package.json ./
 CMD [ "dumb-init", "node", "/app/dist/index.js" ]
-
-FROM build as test
-USER node
-WORKDIR /app
-CMD ["dumb-init", "node", "node_modules/jest/bin/jest", "dist/test"]
