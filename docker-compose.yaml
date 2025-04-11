@@ -9,7 +9,7 @@ services:
       depends_on:
         - api
       networks:
-        - psychic-waffle
+        - dts-test
   
     frontend:
       container_name: react-frontend
@@ -23,7 +23,7 @@ services:
       depends_on:
         - api
       networks:
-        - psychic-waffle
+        - dts-test
   
     api:
       container_name: node-backend
@@ -43,7 +43,7 @@ services:
         db_test:
           condition: service_healthy
       networks:
-        - psychic-waffle
+        - dts-test
   
     db_test:
       image: postgres:16.4
@@ -59,7 +59,7 @@ services:
       volumes:
         - ./pg_data_test:/var/lib/postgresql/data
       networks:
-        - psychic-waffle
+        - dts-test
       healthcheck:
         test: "pg_isready -h db_test"
         interval: 5s
@@ -69,5 +69,5 @@ services:
 volumes:
   pg_data_test:
 networks:
-  psychic-waffle:
+  dts-test:
     driver: bridge
