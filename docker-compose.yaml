@@ -17,9 +17,9 @@ services:
         context: ./client
         dockerfile: Dockerfile
       environment:
-        - PORT=${TEST_REACT_PORT}
+        - PORT=${REACT_PORT}
       ports:
-        - "3000:${TEST_REACT_PORT}"
+        - "3000:${REACT_PORT}"
       depends_on:
         - api
       networks:
@@ -31,14 +31,14 @@ services:
         context: ./server
         dockerfile: Dockerfile
       environment:
-        - PORT=${TEST_API_PORT}
-        - TEST_POSTGRES_USER=${TEST_DB_USER}
-        - TEST_POSTGRES_PASSWORD=${TEST_DB_PASSWORD}
-        - TEST_POSTGRES_DB=${TEST_DB_NAME}
-        - TEST_POSTGRES_HOST=${TEST_DB_HOST}
-        - TEST_POSTGRES_PORT=${TEST_DB_PORT}
+        - PORT=${API_PORT}
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_DB=${DB_NAME}
+        - POSTGRES_HOST=${DB_HOST}
+        - POSTGRES_PORT=${DB_PORT}
       ports:
-        - "8080:${TEST_API_PORT}"
+        - "8080:${API_PORT}"
       depends_on:
         db_test:
           condition: service_healthy
@@ -47,15 +47,15 @@ services:
   
     db_test:
       image: postgres:16.4
-      container_name: ${TEST_DB_HOST}
+      container_name: ${DB_HOST}
       environment:
-        - PGUSER=${TEST_DB_USER}
-        - POSTGRES_USER=${TEST_DB_USER}
-        - POSTGRES_PASSWORD=${TEST_DB_PASSWORD}
-        - POSTGRES_DB=${TEST_DB_NAME}
-        - POSTGRES_HOST=${TEST_DB_HOST}
+        - PGUSER=${DB_USER}
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_DB=${DB_NAME}
+        - POSTGRES_HOST=${DB_HOST}
       ports:
-        - '4568:${TEST_DB_PORT}'
+        - '4568:${DB_PORT}'
       volumes:
         - ./pg_data_test:/var/lib/postgresql/data
       networks:
