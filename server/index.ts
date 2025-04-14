@@ -1,12 +1,12 @@
 import express, { Request, Response, NextFunction } from 'express';
-import taskRoutes from './routes/task';
 import { CreateTaskTable } from './mocking/task';
+import router from './routes';
 
 const app = express();
 const port = 8080;
 
 app.use(express.json());
-app.use('/tasks', taskRoutes);
+app.use('/api', router);
 CreateTaskTable();
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

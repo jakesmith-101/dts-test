@@ -5,7 +5,6 @@ import pool from '../db';
 import { QueryResult } from 'pg';
 
 const router = Router();
-let tasks: Task[] = [];
 
 router.get('/', async (req: Request, res: Response) => {
     try {
