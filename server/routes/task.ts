@@ -80,17 +80,10 @@ router.put('/:id', taskValidationRules(), async (req: Request, res: Response) =>
         res.status(400).json({ errors: errors.array() });
         return;
     }
-
-    const task: Task = {
-        id: parseInt(req.params.id),
-        title: req.body.title as string,
-        description: req.body.description as string | undefined,
-        status: req.body.status as boolean,
-        due: req.body.due as Date,
-    }
+    const task = req.body as Omit<Task, "id">
 
     try {
-        const result = await pool.query(`UPDATE tasks SET title=$2, description=$3, status=$4, due=$5 WHERE id=$1`, [task.id, task.title, task.description, task.status, task.due]);
+        const result = await pool.query(`UPDATE tasks SET title=$2, description=$3, status=$4, due=$5 WHERE id=$1`, [parseInt(req.params.id), task.title, task.description, task.status, task.due]);
         console.log("Update task: ", req.params.id);
         
         if (result.rowCount && result.rowCount > 0) res.status(200).json({ message: "Task updated successfully" });
