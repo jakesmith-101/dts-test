@@ -26,6 +26,7 @@
     "homepage": "https://github.com/jakesmith-101/dts-test#readme",
     "dependencies": {
         "express": "^5.1.0",
-        "express-validator": "^7.2.1"
+        "express-validator": "^7.2.1",
+        "pg": "^8.14.1"
     }
 }
