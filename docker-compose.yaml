@@ -7,23 +7,23 @@ services:
       ports:
         - "80:80"
       depends_on:
-        - api
+        - backend
       networks:
         - dts-test
   
     frontend:
-      container_name: react-frontend
+      container_name: lit-frontend
       build:
         context: ./client
         dockerfile: Dockerfile
       ports:
         - "3000:3000"
       depends_on:
-        - api
+        - backend
       networks:
         - dts-test
   
-    api:
+    backend:
       container_name: node-backend
       build:
         context: ./server
