@@ -1,13 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state, property, query } from 'lit/decorators.js';
-
-interface TaskItem {
-  id: number;
-  title: string;
-  description?: string;
-  status: boolean;
-  due: Date;
-};
+import { TaskItem } from '../models/task';
 
 @customElement('task-list')
 export class TaskList extends LitElement {
