@@ -7,8 +7,8 @@
     "private": "true",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "ts-node index.ts",
-        "build": "tsc",
+        "start": "webpack && ts-node index.ts",
+        "build": "tsc && webpack",
         "serve": "node dist/index.js"
     },
     "repository": {
