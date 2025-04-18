@@ -42,16 +42,6 @@ export class TaskList extends LitElement {
     this.requestUpdate();
   }
 
-  setHideCompleted(e: Event) {
-    this.hideCompleted = (e.target as HTMLInputElement).checked;
-  }
-
   @query('#newitem')
   input!: HTMLInputElement;
-
-  addToDo() {
-    this._listItems = [...this._listItems,
-    { id: this._listItems.length + 1, title: this.input.value, status: false, due: new Date() }];
-    this.input.value = '';
-  }
 }
