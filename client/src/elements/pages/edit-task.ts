@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state, property, query } from 'lit/decorators.js';
-import { TaskItem } from '../models/task';
+import { TaskItem } from '../../models/task';
 
-@customElement('view-task')
-export class ViewTask extends LitElement {
+@customElement('edit-task')
+export class EditTask extends LitElement {
   static styles = css`
     .completed {
       text-decoration-line: line-through;

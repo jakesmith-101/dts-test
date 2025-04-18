@@ -3,7 +3,7 @@ const __dirname = import.meta.dirname;
 
 var config = {
     mode: "production",
-    entry: "./index.ts",
+    entry: "./src/index.ts",
     output: {
         path: resolve(__dirname, "dist"),
         filename: "main.js"
