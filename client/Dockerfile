@@ -8,6 +8,7 @@ RUN npm run build
 
 #Nginx stage
 FROM nginx:1.27-alpine-slim AS nginx
-COPY ./*.html ./var/www/html/.
-COPY ./*.css ./var/www/html/.
-COPY --from=build /app/dist ./var/www/html
+WORKDIR /var/www/html
+COPY ./*.html .
+COPY ./*.css .
+COPY --from=build /app/dist .
