@@ -27,14 +27,14 @@
     },
     "homepage": "https://github.com/jakesmith-101/dts-test#readme",
     "dependencies": {
-        "lit": "^3.2.1",
-        "webpack": "^5.99.5"
+        "lit": "^3.2.1"
     },
     "devDependencies": {
         "@types/node": "^22.14.0",
         "ts-loader": "^9.5.2",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3",
+        "webpack": "^5.99.5",
         "webpack-cli": "^6.0.1"
     }
 }
