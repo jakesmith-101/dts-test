@@ -3,6 +3,8 @@
     "version": "1.0.0",
     "description": "frontend of test repo",
     "main": "index.html",
+    "type": "module",
+    "private": "true",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "ts-node index.ts",
@@ -25,7 +27,8 @@
     },
     "homepage": "https://github.com/jakesmith-101/dts-test#readme",
     "dependencies": {
-        "lit": "^3.2.1"
+        "lit": "^3.2.1",
+        "webpack": "^5.99.5"
     },
     "devDependencies": {
         "@types/node": "^22.14.0",

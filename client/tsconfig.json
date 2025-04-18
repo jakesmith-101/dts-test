@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
+      "target": "es2024",
+      "module": "ES2022",
+      "moduleResolution": "node",
       "experimentalDecorators": true,
       "outDir": "./dist",
       "strict": true,
